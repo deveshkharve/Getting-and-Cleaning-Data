@@ -1,6 +1,5 @@
-# Code book for Coursera Getting and Cleaning Data course project
-
-subject Subject identifier, integer, ranges from 1 to 30.
+subject 
+	Subject identifier, integer, ranges from 1 to 30.
 
 activity
 	Activity identifier, string with 6 possible values:
@@ -11,7 +10,8 @@ activity
 		SITTING: subject was sitting
 		STANDING: subject was standing
 		LAYING: subject was laying
-Average of measurements
+		
+## Average of measurements
 
 All measurements are floating-point values, normalised and bounded within [-1,1].
 
@@ -19,7 +19,7 @@ Prior to normalisation, acceleration measurements (variables containing Accelero
 
 Magnitudes of three-dimensional signals (variables containing Magnitude) were calculated using the Euclidean norm.
 
-The measurements are classified in two domains:
+## The measurements are classified in two domains:
 
 Time-domain signals (variables prefixed by timeDomain), resulting from the capture of accelerometer and gyroscope raw signals.
 
