@@ -38,25 +38,36 @@ featReq.names <- gsub("Freq", "Frequency", featReq.names)
 featReq.names <- gsub("mean", "Mean", featReq.names)
 featReq.names <- gsub("std", "StandardDeviation", featReq.names)
 
+#read the test and traing DataSet
+#read values for Test dataset
 test <- read.table("UCI HAR Dataset/test/X_test.txt")[featReq]
+#read test activites from dataset
 testActivities <- read.table("UCI HAR Dataset/test/Y_test.txt")
+#read all the subject data
 testSubjects <- read.table("UCI HAR Dataset/test/subject_test.txt")
+#bind all the test data
 test <- cbind(testSubjects, testActivities, test)
 
 train <- read.table("UCI HAR Dataset/train/X_train.txt")[featReq]
+#read test activites from dataset
 trainActivities <- read.table("UCI HAR Dataset/train/Y_train.txt")
+#read all the subject data
 trainSubjects <- read.table("UCI HAR Dataset/train/subject_train.txt")
+#bind all the train data
 train <- cbind(trainSubjects, trainActivities, train)
 
 # merge datasets and add labels
 allData <- rbind(train, test)
+#add column names for subject and activity columns 
 colnames(allData) <- c("subject", "activity", featReq.names)
 
 # turn activities & subjects into factors
 allData$activity <- factor(allData$activity, levels = activityLabels[,1], labels = activityLabels[,2])
 allData$subject <- as.factor(allData$subject)
 
+#convert all the data for subject and activity column
 allData.melted <- melt(allData, id = c("subject", "activity"))
 allData.mean <- dcast(allData.melted, subject + activity ~ variable, mean)
 
+#save allData into txt file
 write.table(allData.mean, "tidy.txt", row.names = FALSE, quote = FALSE)
